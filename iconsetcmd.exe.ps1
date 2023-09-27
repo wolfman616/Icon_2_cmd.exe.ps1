@@ -1,3 +1,11 @@
+if ($args.Length -gt 0) {
+    # Use the provided argument as the icon file path
+    $iconPath = $args[0]
+} else {
+    # Use the default icon path
+    $iconPath = "C:\Icon\256\sphere.ico"
+}
+
 # Define constants for LoadImage function
 $IMAGE_ICON = 1
 $LR_LOADFROMFILE = 16
@@ -22,15 +30,12 @@ function LoadImage {
     return $loadImage::LoadImage($hInst, $lpszName, $uType, $cxDesired, $cyDesired, $fuLoad)
 }
 
-# Icon file path
-$iconPath = "C:\Icon\256\sphere.ico"
-
 # Load the icon and get the handle
 $hIcon = [System.IntPtr]::Zero
 $hIcon = LoadImage $hIcon $iconPath $IMAGE_ICON 0 0 $LR_LOADFROMFILE
 
-# Output the HICON handle
-Write-Host "Icon Handle: $hIcon"
+<# # Output the HICON handle
+# Write-Host "Icon Handle: $hIcon" #>
 
 # Get the current working directory path
 $currentDirectoryPath = (Get-Location).Path
